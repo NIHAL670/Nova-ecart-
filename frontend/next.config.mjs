@@ -1,6 +1,7 @@
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const remotePatterns = [
   { protocol: 'https', hostname: 'picsum.photos' },
+  { protocol: 'https', hostname: 'fastly.picsum.photos' },
   { protocol: 'https', hostname: 'res.cloudinary.com' },
   { protocol: 'https', hostname: 'images.unsplash.com' },
   { protocol: 'http', hostname: 'localhost', port: '5000' },
