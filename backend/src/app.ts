@@ -33,11 +33,20 @@ export function createApp(): Application {
   app.use(
     cors({
       origin: (origin, cb) => {
-        // In development, allow any origin (localhost variants, LAN IPs, etc.)
-        // so the app works regardless of which host the browser opens it from.
         if (!isProduction) return cb(null, true);
-        if (!origin || env.CORS_ORIGIN.includes(origin)) return cb(null, true);
-        cb(new Error('Not allowed by CORS'));
+        if (!origin) return cb(null, true);
+        if (
+          env.CORS_ORIGIN.includes('*') ||
+          env.CORS_ORIGIN.includes(origin) ||
+          origin.endsWith('.vercel.app') ||
+          origin.endsWith('.netlify.app') ||
+          origin.endsWith('.render.com') ||
+          origin.includes('localhost') ||
+          origin.includes('127.0.0.1')
+        ) {
+          return cb(null, true);
+        }
+        cb(new Error(`Origin ${origin} not allowed by CORS. Please set CORS_ORIGIN in your environment variables.`));
       },
       credentials: true,
     }),
