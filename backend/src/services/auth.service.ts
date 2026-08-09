@@ -43,13 +43,11 @@ export async function registerUser(input: { name: string; email: string; passwor
     email: input.email,
     password: input.password,
     phone: fullPhone,
-    isEmailVerified: false,
+    isEmailVerified: true,
   });
-  const devCode = await createAndSendOtp(user.email, OtpPurpose.SIGNUP);
 
   return {
     user: sanitizeUser(user),
-    devCode,
   };
 }
 

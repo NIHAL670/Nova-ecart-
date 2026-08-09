@@ -21,8 +21,8 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
   const { user } = await authService.registerUser(req.body);
   res.status(201).json(
     ok(
-      { user, requiresOtp: true },
-      'Registration successful. Please verify with the OTP sent to your phone number.',
+      { user, requiresOtp: false },
+      'Registration successful. You can now log in.',
     ),
   );
 });
