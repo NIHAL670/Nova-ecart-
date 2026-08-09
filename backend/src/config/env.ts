@@ -48,10 +48,6 @@ const envSchema = z.object({
   SMTP_FROM: z.string().default('Nova Cart <noreply@novacart.com>'),
   CLIENT_URL: z.string().default('http://localhost:3000'),
 
-  TWILIO_ACCOUNT_SID: z.string().optional(),
-  TWILIO_AUTH_TOKEN: z.string().optional(),
-  TWILIO_PHONE_NUMBER: z.string().optional(),
-
   DEFAULT_PAYMENT_GATEWAY: z.enum(['stripe', 'razorpay', 'cod', 'both']).default('both'),
   STRIPE_SECRET_KEY: z.string().optional(),
   STRIPE_PUBLISHABLE_KEY: z.string().optional(),

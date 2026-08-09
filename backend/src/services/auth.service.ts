@@ -11,7 +11,7 @@ import { User } from '../models/User';
 import { Role, OtpPurpose } from '../types/enums';
 import { ApiError } from '../utils/ApiError';
 import { signAccessToken, signRefreshToken, verifyRefreshToken } from '../utils/tokens';
-import { createAndSendOtp, verifyOtp, createAndSendOtpForPhone } from './otp.service';
+import { createAndSendOtp, verifyOtp } from './otp.service';
 import { env } from '../config/env';
 
 export interface AuthResult {
@@ -45,7 +45,7 @@ export async function registerUser(input: { name: string; email: string; passwor
     phone: fullPhone,
     isEmailVerified: false,
   });
-  const devCode = await createAndSendOtpForPhone(user.email, user.phone!, OtpPurpose.SIGNUP);
+  const devCode = await createAndSendOtp(user.email, OtpPurpose.SIGNUP);
 
   return {
     user: sanitizeUser(user),
@@ -67,7 +67,7 @@ export async function resendSignupOtp(email: string) {
   if (!user || !user.phone || user.phone.trim() === '') {
     throw ApiError.badRequest('number not correct');
   }
-  return createAndSendOtpForPhone(email, user.phone!, OtpPurpose.SIGNUP);
+  return createAndSendOtp(email, OtpPurpose.SIGNUP);
 }
 
 export async function loginUser(email: string, password: string): Promise<AuthResult> {

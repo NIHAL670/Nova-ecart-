@@ -45,7 +45,7 @@ function VerifyEmailForm() {
     setPending(true);
     try {
       await verifyEmail(targetEmail, code);
-      toast.success('Phone number verified! You can now sign in.');
+      toast.success('Email address verified! You can now sign in.');
       router.push('/login');
     } catch (err) {
       toast.error(getErrorMessage(err));
@@ -74,8 +74,8 @@ function VerifyEmailForm() {
       <div className="flex items-center gap-3 rounded-xl border bg-muted/50 p-3 text-sm">
         <MailCheck className="h-9 w-9 shrink-0 text-primary" />
         <div>
-          <p className="font-medium">Verify your phone number</p>
-          <p className="text-muted-foreground">Enter the 6-digit code sent to your registered phone number to activate your account.</p>
+          <p className="font-medium">Verify your email address</p>
+          <p className="text-muted-foreground">Enter the 6-digit code sent to your registered email address to activate your account.</p>
         </div>
       </div>
 

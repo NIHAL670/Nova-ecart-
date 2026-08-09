@@ -74,7 +74,7 @@ function SignupForm() {
         setOtpEmail(values.email);
         setStep('otp');
         setResendCount(RESEND_SECONDS);
-        toast.info('We sent a verification code to your phone number');
+        toast.info('We sent a verification code to your email address');
       } else {
         toast.success('Account created! You can now sign in.');
         router.push('/login');
@@ -90,7 +90,7 @@ function SignupForm() {
     setVerifying(true);
     try {
       await verifyEmail(otpEmail, code);
-      toast.success('Phone verified!');
+      toast.success('Email verified!');
       router.push('/login');
     } catch (err) {
       toast.error(getErrorMessage(err));
@@ -116,9 +116,9 @@ function SignupForm() {
         <div className="flex items-center gap-3 rounded-xl border bg-muted/50 p-3 text-sm">
           <MailCheck className="h-9 w-9 shrink-0 text-primary" />
           <div>
-            <p className="font-medium">Verify your phone number</p>
+            <p className="font-medium">Verify your email address</p>
             <p className="text-muted-foreground">
-              We sent a 6-digit code to your registered phone number
+              We sent a 6-digit code to your registered email address
             </p>
           </div>
         </div>
