@@ -588,16 +588,25 @@ async function seedCategories(): Promise<Map<string, string>> {
 }
 
 async function seedProducts(slugToId: Map<string, string>): Promise<void> {
+  const productsToInsert = [];
+  const usedSlugs = new Set<string>();
+
   for (const demo of ALL_PRODUCTS) {
     const catId = slugToId.get(demo.category);
     if (!catId) continue;
-    const exists = await Product.findOne({ name: demo.name });
-    if (exists) continue;
+
+    let baseSlug = slugify(demo.name);
+    let slug = baseSlug;
+    let n = 2;
+    while (usedSlugs.has(slug)) {
+      slug = `${baseSlug}-${n++}`;
+    }
+    usedSlugs.add(slug);
 
     const compareAtPrice = demo.compareAt;
-    await Product.create({
+    productsToInsert.push({
       name: demo.name,
-      slug: slugify(demo.name),
+      slug: slug,
       description: `${demo.name} — premium quality, tested and built for everyday use. Free returns within 30 days.`,
       shortDescription: demo.tags.join(', '),
       category: catId,
@@ -617,7 +626,12 @@ async function seedProducts(slugToId: Map<string, string>): Promise<void> {
       soldCount: Math.floor(Math.random() * 500),
       status: 'active',
     });
-    log(`  ✔ Product: ${demo.name}`);
+  }
+
+  if (productsToInsert.length > 0) {
+    log(`  📦 Inserting ${productsToInsert.length} products in bulk...`);
+    await Product.insertMany(productsToInsert);
+    log(`  ✔ ${productsToInsert.length} products inserted.`);
   }
 }
 
