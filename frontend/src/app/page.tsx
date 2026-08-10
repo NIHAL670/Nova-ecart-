@@ -84,9 +84,9 @@ function CountUp({ value, decimals = 0, suffix = '' }: { value: number; decimals
 
 function TimeBox({ value, label }: { value: string; label: string }) {
   return (
-    <div className="flex min-w-[52px] flex-col items-center rounded-xl border bg-card/80 px-2 py-1.5 backdrop-blur">
-      <span className="font-display text-lg font-bold tabular-nums leading-none">{value}</span>
-      <span className="mt-1 text-[10px] uppercase tracking-wide text-muted-foreground">{label}</span>
+    <div className="flex min-w-[42px] sm:min-w-[52px] flex-col items-center rounded-xl border bg-card/80 px-1 py-1 sm:px-2 sm:py-1.5 backdrop-blur">
+      <span className="font-display text-base sm:text-lg font-bold tabular-nums leading-none">{value}</span>
+      <span className="mt-0.5 sm:mt-1 text-[8px] sm:text-[10px] uppercase tracking-wide text-muted-foreground">{label}</span>
     </div>
   );
 }
@@ -390,12 +390,12 @@ function OffersSection() {
           <h2 className="font-display text-lg font-bold text-foreground md:text-xl">Deals of the Day</h2>
           <p className="text-xs text-muted-foreground">Unbeatable limited-time price drops</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <span className="inline-flex items-center gap-1.5 rounded-full border bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground">
             <Flame className="h-3.5 w-3.5 text-primary" /> Ends in:
           </span>
           <CountdownDisplay target={target} />
-          <Button asChild variant="outline" size="sm" className="rounded-full font-bold border-primary text-primary hover:bg-primary/5 ml-2">
+          <Button asChild variant="outline" size="sm" className="rounded-full font-bold border-primary text-primary hover:bg-primary/5 ml-0 sm:ml-2">
             <Link href="/products?sort=-discountPercent">View All</Link>
           </Button>
         </div>

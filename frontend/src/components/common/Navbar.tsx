@@ -11,6 +11,7 @@ import { UserMenu } from './UserMenu';
 import { useCartStore } from '@/store/cartStore';
 import { useWishlistStore } from '@/store/wishlistStore';
 import { useUiStore } from '@/store/uiStore';
+import { useAuthStore } from '@/store/authStore';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
@@ -22,6 +23,7 @@ const NAV_LINKS = [
 export function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const user = useAuthStore((s) => s.user);
   const cartCount = useCartStore((s) => s.items.reduce((sum, i) => sum + i.quantity, 0));
   const wishCount = useWishlistStore((s) => s.ids.length);
   const openSearch = useUiStore((s) => s.openSearch);
@@ -111,6 +113,21 @@ export function Navbar() {
                 Wishlist ({wishCount})
               </Link>
             </li>
+            {!user && (
+              <>
+                <li className="my-2 border-t border-border" />
+                <li>
+                  <Link href="/login" onClick={() => setMobileOpen(false)} className="block rounded-xl px-4 py-2.5 text-sm font-medium text-primary hover:bg-accent">
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/signup" onClick={() => setMobileOpen(false)} className="block rounded-xl px-4 py-2.5 text-sm font-medium hover:bg-accent">
+                    Sign up
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       )}

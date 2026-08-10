@@ -31,7 +31,7 @@ export function CheckoutStepper({ step, className }: CheckoutStepperProps) {
             </span>
             <span
               className={cn(
-                'text-sm font-medium capitalize',
+                'text-sm font-medium capitalize hidden sm:inline',
                 state === 'todo' && 'text-muted-foreground',
               )}
             >

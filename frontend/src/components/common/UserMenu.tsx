@@ -17,11 +17,11 @@ export function UserMenu() {
 
   if (!user) {
     return (
-      <div className="flex items-center gap-2">
-        <Button asChild variant="ghost" size="sm">
+      <div className="flex items-center gap-1 sm:gap-2">
+        <Button asChild variant="ghost" size="sm" className="px-2 sm:px-3 text-xs sm:text-sm">
           <Link href="/login">Login</Link>
         </Button>
-        <Button asChild size="sm">
+        <Button asChild size="sm" className="hidden sm:inline-flex">
           <Link href="/signup">Sign up</Link>
         </Button>
       </div>

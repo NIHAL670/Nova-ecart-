@@ -142,14 +142,14 @@ export default function AdminInventoryPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="mb-4 flex w-fit flex-wrap items-center gap-1 rounded-full border bg-muted/40 p-1">
+          <div className="mb-4 flex w-full max-w-full overflow-x-auto no-scrollbar flex-nowrap items-center gap-1 rounded-full border bg-muted/40 p-1">
             {FILTERS.map((f) => (
               <button
                 key={f.key}
                 type="button"
                 onClick={() => setFilter(f.key)}
                 className={cn(
-                  'rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors',
+                  'shrink-0 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors',
                   filter === f.key
                     ? 'bg-primary text-primary-foreground shadow-sm'
                     : 'text-muted-foreground hover:text-foreground',
